@@ -1,0 +1,6 @@
+# Rename this file to `hubot.conf` and put your own values
+
+# Campfire adapter settings
+export HUBOT_CAMPFIRE_TOKEN=abcdef123456abcdef12345abcdf12346
+export HUBOT_CAMPFIRE_ACCOUNT=hubotorium
+export HUBOT_CAMPFIRE_ROOMS=500000,5000001
