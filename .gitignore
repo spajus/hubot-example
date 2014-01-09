@@ -1,2 +1,5 @@
 node_modules
 .DS_Store*
+hubot.conf
+hubot.log
+hubot.pid
