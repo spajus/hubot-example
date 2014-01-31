@@ -21,7 +21,6 @@ module.exports = (robot) ->
   robot.router.post "/github/pushes/pubsub/:event", (req, res) ->
     res.end('')
     event = req.params.event
-    console.log "event:", event
     try
       payload = req.body
       prefix = ">>> "
