@@ -46,11 +46,11 @@ do_start()
 
   touch $PIDFILE && chown $USER:$GROUP $PIDFILE
 
-	start-stop-daemon --no-close --user $USER --quiet --start --pidfile $PIDFILE -c $USER:$GROUP \
-	  --make-pidfile \
-	  --background --chdir $BOT_PATH --exec $DAEMON -- \
-		$DAEMON_ARGS >> $LOGFILE 2>&1 \
-		||  return 2
+    start-stop-daemon --no-close --user $USER --quiet --start --pidfile $PIDFILE -c $USER:$GROUP \
+      --make-pidfile \
+      --background --chdir $BOT_PATH --exec $DAEMON -- \
+        $DAEMON_ARGS >> $LOGFILE 2>&1 \
+        ||  return 2
 }
 
 do_stop()
@@ -59,55 +59,55 @@ do_stop()
   pidofproc -p $PIDFILE node >/dev/null || status="$?"
   [ "$status" = 3 ] && return 1
 
-	start-stop-daemon --stop --quiet --pidfile $PIDFILE
-	RETVAL="$?"
-	[ "$RETVAL" = 2 ] && return 2
-	rm -f $PIDFILE
-	return "$RETVAL"
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    RETVAL="$?"
+    [ "$RETVAL" = 2 ] && return 2
+    rm -f $PIDFILE
+    return "$RETVAL"
 }
 
 case "$1" in
   start)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
-	do_start
-	case "$?" in
-		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
-	;;
+    [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+    do_start
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
   stop)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
-	do_stop
-	case "$?" in
-		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
-	;;
+    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    do_stop
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
   status)
-	status_of_proc -p $PIDFILE node $NAME && exit 0 || exit $?
-	;;
+    status_of_proc -p $PIDFILE node $NAME && exit 0 || exit $?
+    ;;
   restart|force-reload)
-	log_daemon_msg "Restarting $DESC" "$NAME"
-	do_stop
-	case "$?" in
-	  0|1)
-		do_start
-		case "$?" in
-			0) log_end_msg 0 ;;
-			1) log_end_msg 1 ;; # Old process is still running
-			*) log_end_msg 1 ;; # Failed to start
-		esac
-		;;
-	  *)
-		# Failed to stop
-		log_end_msg 1
-		;;
-	esac
-	;;
+    log_daemon_msg "Restarting $DESC" "$NAME"
+    do_stop
+    case "$?" in
+      0|1)
+        do_start
+        case "$?" in
+            0) log_end_msg 0 ;;
+            1) log_end_msg 1 ;; # Old process is still running
+            *) log_end_msg 1 ;; # Failed to start
+        esac
+        ;;
+      *)
+        # Failed to stop
+        log_end_msg 1
+        ;;
+    esac
+    ;;
   *)
-	echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
-	exit 3
-	;;
+    echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+    exit 3
+    ;;
 esac
 
 :
