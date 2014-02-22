@@ -7,3 +7,7 @@ export HUBOT_CAMPFIRE_ROOMS=500000,5000001
 
 # Ignore URLs that contain `github.com/spajus`
 export HUBOT_HTTP_INFO_IGNORE_URLS="github\.com/spajus"
+
+# Jenkins URI for jenkins-builder.coffee
+export HUBOT_JENKINS_URI="http://set-to-your-jenkins.com"
+export HUBOT_JENKINS_BUILD_TOKEN="somesecret"
