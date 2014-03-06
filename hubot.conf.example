@@ -1,5 +1,8 @@
 # Rename this file to `hubot.conf` and put your own values
 
+# Comma separated list of users who administer Hubot Auth
+export HUBOT_AUTH_ADMIN=123456,234567
+
 # Campfire adapter settings
 export HUBOT_CAMPFIRE_TOKEN=abcdef123456abcdef12345abcdf12346
 export HUBOT_CAMPFIRE_ACCOUNT=hubotorium
