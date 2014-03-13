@@ -18,10 +18,9 @@ process.env.HUBOT_WEATHER_UNITS ||= 'imperial'
 module.exports = (robot) ->
   robot.hear /weather in (\w+)/i, (msg) ->
     city = msg.match[1]
-    query = "units=#{process.env.HUBOT_WEATHER_UNITS}" +
-            "&q=#{encodeURIComponent(city)}"
-    url = "#{process.env.HUBOT_WEATHER_API_URL}?#{query}"
-    msg.robot.http(url).get() (err, res, body) ->
+    query = { units: process.env.HUBOT_WEATHER_UNITS, q: city }
+    url = process.env.HUBOT_WEATHER_API_URL
+    msg.robot.http(url).query(query).get() (err, res, body) ->
       data = JSON.parse(body)
       weather = [ "#{Math.round(data.main.temp)} degrees" ]
       for w in data.weather
