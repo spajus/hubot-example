@@ -3,3 +3,4 @@ node_modules
 hubot.conf
 hubot.log
 hubot.pid
+logs/
