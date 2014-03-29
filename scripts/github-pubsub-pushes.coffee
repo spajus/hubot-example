@@ -4,9 +4,6 @@
 # Dependencies:
 #   "hubot-pubsub": "1.0.0"
 #
-# Configuration:
-#   Just put this url <HUBOT_URL>:<PORT>/hubot/gh-commits?room=<room> into you'r github hooks
-#
 # Commands:
 #   None
 #
@@ -48,6 +45,7 @@ module.exports = (robot) ->
                     "#{payload.repository.name}:#{payload.ref.replace('refs/heads/', '')}"
           if payload.commits.length > 1
             message += " (compare: #{payload.compare})"
+            robot.emit 'pubsub:publish', event, message
             for commit in payload.commits
               robot.emit 'pubsub:publish', event, "  * #{commit.message} (#{commit.url})"
           else
@@ -67,4 +65,4 @@ module.exports = (robot) ->
           robot.emit 'pubsub:publish', event, "#{prefix}#{payload.pusher.name} " +
                      "deleted: #{payload.ref.replace('refs/heads/', '')}"
     catch error
-      console.log "github-pubsub-pushe error: #{error}. Payload: #{req.body}"
+      console.log "github-pubsub-pushes error: #{error}. Payload: #{req.body}"
