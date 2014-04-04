@@ -14,3 +14,7 @@ export HUBOT_HTTP_INFO_IGNORE_URLS="github\.com/spajus"
 # Jenkins URI for jenkins-builder.coffee
 export HUBOT_JENKINS_URI="http://set-to-your-jenkins.com"
 export HUBOT_JENKINS_BUILD_TOKEN="somesecret"
+
+# GitLab root URL and private token
+export GITLAB_ROOT_URL="http://set-to-your-gitlab.com"
+export GITLAB_API_TOKEN=7FD4pBsEFMfjLnxrQ52x
