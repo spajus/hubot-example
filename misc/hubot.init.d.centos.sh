@@ -19,7 +19,7 @@ NAME=hubot
 USER=hubot
 GROUP=hubot
 BOT_PATH=/home/hubot/campfire
-PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:$BOT_PATH/${NAME}_modules:$BOT_PATH/${NAME}_modules/hubot/${NAME}_modules
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:$BOT_PATH/node_modules:$BOT_PATH/node_modules/hubot/node_modules
 DAEMON=$BOT_PATH/bin/$NAME
 DAEMON_ARGS="--adapter campfire --name hubot"
 PIDFILE=$BOT_PATH/$NAME.pid
@@ -35,7 +35,7 @@ case "$1" in
     status -p ${PIDFILE} ${NAME} > /dev/null || status="$?"
     if [ "$status" = 0 ]; then
       status -p ${PIDFILE} ${NAME}
-      exit 2 
+      exit 2
     fi
 
     touch $PIDFILE && chown $USER:$GROUP $PIDFILE
