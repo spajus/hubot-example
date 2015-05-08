@@ -49,7 +49,10 @@ case "$1" in
     status -p ${PIDFILE} ${NAME}
     ;;
   stop)
-    killproc -p ${PIDFILE} ${NAME} -INT
+  # this isn't nice, but needed because the kill doesn't pass to the children
+    p=`cat ${PIDFILE}`
+    killme=`pgrep -P $p`
+    pkill -P $killme
     rm -f ${PIDFILE}
     status -p ${PIDFILE} ${NAME}
     ;;
@@ -67,4 +70,3 @@ case "$1" in
 esac
 
 # vim:ft=sh
-
