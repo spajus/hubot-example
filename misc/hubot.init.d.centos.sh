@@ -44,7 +44,7 @@ case "$1" in
               cd $BOT_PATH && $DAEMON $DAEMON_ARGS" - $USER  >> \
               ${LOGFILE} 2>&1 &
       sleep 2
-      PID=`pgrep -u hubot node`
+      PID=`pgrep -u $USER node`
       echo $PID > $PIDFILE
     else
       (cd $BOT_PATH; $DAEMON $DAEMON_ARGS  >> ${LOGFILE} 2>&1 & echo $! > $PIDFILE)
