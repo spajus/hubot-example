@@ -42,7 +42,10 @@ case "$1" in
     if [ "$(whoami)" != "$USER" ]; then
       runuser -c "[ -r $BOT_PATH/hubot.conf ] && . $BOT_PATH/hubot.conf && \
               cd $BOT_PATH && $DAEMON $DAEMON_ARGS" - $USER  >> \
-              ${LOGFILE} 2>&1 & echo $! > $PIDFILE
+              ${LOGFILE} 2>&1 &
+      sleep 2
+      PID=`pgrep -u $USER node`
+      echo $PID > $PIDFILE
     else
       (cd $BOT_PATH; $DAEMON $DAEMON_ARGS  >> ${LOGFILE} 2>&1 & echo $! > $PIDFILE)
     fi
